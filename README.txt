@@ -11,4 +11,3 @@ smile.jpg
 test.pro
 test.pro.user
 
-Implémentation de QSlider / QLCDNumber avec connect
