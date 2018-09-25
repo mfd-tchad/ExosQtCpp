@@ -4,7 +4,8 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
-
+#include <QLCDNumber>
+#include <QSlider>
 
 class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -14,7 +15,8 @@ class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
     ~MaFenetre();
 
     private:
-    QPushButton *m_bouton;
+    QLCDNumber *m_lcd;
+    QSlider *m_slider;
 };
 
 #endif // MAFENETRE_H
