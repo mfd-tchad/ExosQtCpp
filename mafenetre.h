@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QLCDNumber>
 #include <QSlider>
+#include <QProgressBar>
 
 class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -17,6 +18,7 @@ class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
     private:
     QLCDNumber *m_lcd;
     QSlider *m_slider;
+    QProgressBar *m_progress;
 };
 
 #endif // MAFENETRE_H
