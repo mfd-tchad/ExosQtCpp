@@ -20,15 +20,16 @@
  void MaFenetre::ouvrirDialogue()
  {
     bool ok = false;
-    QString pseudo = QInputDialog::getText(this, "Pseudo", "Quel est votre pseudo ?",QLineEdit::Normal,QString(),&ok);
-    if (ok && !pseudo.isEmpty())
-     {
-        QMessageBox::information(this, "Pseudo", "Bonjour " + pseudo + ", ça va ?");
+    QFont police = QFontDialog::getFont(&ok, m_boutonDialogue->font(), this, "Choisissez une police");
+    if (ok)
+    {
+        m_boutonDialogue->setFont(police);
      }
-    else
-     {
-        QMessageBox::critical(this, "Pseudo", "Vous n'avez pas voulu donner votre nom… snif.");
-     }
+    QColor couleur = QColorDialog::getColor(Qt::white, this);
+
+    QPalette palette;
+    palette.setColor(QPalette::ButtonText,couleur);
+    m_boutonDialogue->setPalette(palette);
  }
 
  void MaFenetre::ouvrirQuestion()

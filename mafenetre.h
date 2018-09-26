@@ -6,6 +6,9 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QFontDialog>
+#include <QColorDialog>
+#include <QPalette>
 
 class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 {
