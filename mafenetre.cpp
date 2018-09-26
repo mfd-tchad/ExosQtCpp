@@ -3,59 +3,48 @@
  MaFenetre::MaFenetre() : QWidget()
 
 {
-    setFixedSize(200, 120);
+    setFixedSize(300, 120);
 
 
-    m_sliderH = new QSlider(Qt::Horizontal, this);
-    m_sliderH->setRange(200,600);
-    m_sliderH->setGeometry(10,60,150,20);
+    m_boutonDialogue = new QPushButton("Ouvrir la boite de dialogue", this);
+    m_boutonDialogue->move(40,30);
 
-    m_sliderV = new QSlider(Qt::Vertical, this);
-    m_sliderV->setRange(120,500);
-    m_sliderV->setGeometry(170,10,20,100);
+    QObject::connect(m_boutonDialogue, SIGNAL(clicked()), this, SLOT(ouvrirDialogue()));
 
-    QObject::connect(m_sliderH, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int))) ;
-    QObject::connect(m_sliderV, SIGNAL(valueChanged(int)), this, SLOT(changerHauteur(int))) ;
-    QObject::connect(this, SIGNAL(agrandissementMax()), qApp, SLOT(quit()));
+    m_boutonQuestion = new QPushButton("Ouvrir ne nouvelle boite de dialogue", this);
+    m_boutonQuestion->move(40,60);
+
+    QObject::connect(m_boutonQuestion, SIGNAL(clicked()), this, SLOT(ouvrirQuestion()));
  }
 
- MaFenetre::MaFenetre(int p_largeur, int p_hauteur) : QWidget()
+ void MaFenetre::ouvrirDialogue()
  {
-     setFixedSize(p_largeur, p_hauteur);
-
-     m_sliderH = new QSlider(Qt::Horizontal, this);
-     m_sliderH->setRange(200,600);
-     m_sliderH->setGeometry(10,60,150,20);
-
-     m_sliderV = new QSlider(Qt::Vertical, this);
-     m_sliderV->setRange(120,500);
-     m_sliderV->setGeometry(170,10,20,100);
-
-     QObject::connect(m_sliderH, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int))) ;
-     QObject::connect(m_sliderV, SIGNAL(valueChanged(int)), this, SLOT(changerHauteur(int))) ;
-     QObject::connect(this, SIGNAL(agrandissementMax()), qApp, SLOT(quit()));
- }
-
- void MaFenetre::changerLargeur(int largeur)
- {
-     setFixedSize(largeur, height());
-     if (largeur ==600)
+    bool ok = false;
+    QString pseudo = QInputDialog::getText(this, "Pseudo", "Quel est votre pseudo ?",QLineEdit::Normal,QString(),&ok);
+    if (ok && !pseudo.isEmpty())
      {
-         emit agrandissementMax();
+        QMessageBox::information(this, "Pseudo", "Bonjour " + pseudo + ", ça va ?");
+     }
+    else
+     {
+        QMessageBox::critical(this, "Pseudo", "Vous n'avez pas voulu donner votre nom… snif.");
      }
  }
 
- void MaFenetre::changerHauteur(int hauteur)
+ void MaFenetre::ouvrirQuestion()
  {
-     setFixedSize(width(), hauteur);
-     if (hauteur == 500)
+     int reponse = QMessageBox::question(this, "Interrogatoire", "Dites voir, <strong>Etes vous vraiment un zéro ? !</strong>", QMessageBox::Yes | QMessageBox::No);
+     if (reponse == QMessageBox::Yes)
      {
-         emit agrandissementMax();
+         QMessageBox::information(this, "Interrogatoire", "Alors bienvenue chezles Zéros !");
+     }
+     else if (reponse == QMessageBox::No)
+     {
+         QMessageBox::critical(this, "Interrogatoire", "Tricheur ! Menteur ! Voleur ! Ingrat ! Lâche ! Traître !\nSors d'ici ou j'appelle la police !");
      }
  }
 
 MaFenetre::~MaFenetre()
 {
-    delete m_sliderH;
-    delete m_sliderV;
+    delete m_boutonDialogue;
 }

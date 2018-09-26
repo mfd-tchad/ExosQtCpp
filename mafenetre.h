@@ -4,9 +4,8 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
-#include <QLCDNumber>
-#include <QSlider>
-#include <QProgressBar>
+#include <QMessageBox>
+#include <QInputDialog>
 
 class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -14,19 +13,15 @@ class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 
     public:
     MaFenetre();
-    MaFenetre(int largeur, int hauteur);
     ~MaFenetre();
 
     public slots:
-    void changerLargeur(int largeur);
-    void changerHauteur(int hauteur);
-
-    signals:
-    void agrandissementMax();
+    void ouvrirDialogue();
+    void ouvrirQuestion();
 
     private:
-    QSlider *m_sliderH;
-    QSlider *m_sliderV;
-};
+    QPushButton *m_boutonDialogue;
+    QPushButton *m_boutonQuestion;
+ };
 
 #endif // MAFENETRE_H
