@@ -19,33 +19,18 @@
 
  void MaFenetre::ouvrirDialogue()
  {
-    bool ok = false;
-    QFont police = QFontDialog::getFont(&ok, m_boutonDialogue->font(), this, "Choisissez une police");
-    if (ok)
-    {
-        m_boutonDialogue->setFont(police);
-     }
-    QColor couleur = QColorDialog::getColor(Qt::white, this);
-
-    QPalette palette;
-    palette.setColor(QPalette::ButtonText,couleur);
-    m_boutonDialogue->setPalette(palette);
+    QString fichier = QFileDialog::getOpenFileName(this,"Ouvrir un fichier", QString(),"Images (*.png *.gif *.jpg, *.jpeg)");
+    QMessageBox::information(this, "Fichier", "Vous avez sélectionné :\n" + fichier);
  }
 
  void MaFenetre::ouvrirQuestion()
  {
-     int reponse = QMessageBox::question(this, "Interrogatoire", "Dites voir, <strong>Etes vous vraiment un zéro ? !</strong>", QMessageBox::Yes | QMessageBox::No);
-     if (reponse == QMessageBox::Yes)
-     {
-         QMessageBox::information(this, "Interrogatoire", "Alors bienvenue chezles Zéros !");
-     }
-     else if (reponse == QMessageBox::No)
-     {
-         QMessageBox::critical(this, "Interrogatoire", "Tricheur ! Menteur ! Voleur ! Ingrat ! Lâche ! Traître !\nSors d'ici ou j'appelle la police !");
-     }
+    QString dossier = QFileDialog::getExistingDirectory(this);
+    QString fichier = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", dossier, "Images (*.png *.gif *.jpg, *.jpeg)");
  }
 
 MaFenetre::~MaFenetre()
 {
     delete m_boutonDialogue;
+    delete m_boutonQuestion;
 }

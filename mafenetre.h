@@ -9,6 +9,7 @@
 #include <QFontDialog>
 #include <QColorDialog>
 #include <QPalette>
+#include <QFileDialog>
 
 class MaFenetre : public QWidget // On hérite de QWidget (IMPORTANT)
 {
